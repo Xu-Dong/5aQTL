@@ -1,4 +1,4 @@
-# 5aQTL
+# 5'aQTL
 source codes for 5aQTL analysis in the manuscript
 [![5'aQTL](https://img.shields.io/badge/5'aQTL-brightgreen)](https://github.com/Xu-Dong/5aQTL)
 [![python Release](https://img.shields.io/badge/python-3.9-brightgreen)](https://www.python.org/downloads/)
