@@ -9,6 +9,7 @@ main(){
     run_mashr
 }
 
+# generate mashr input QTL file: gene|variant|nominal_pval|effect
 function run_prepare_eQTL_in_mashr_format(){
     aqtlDir=$basedir/input/QTL_fold
     mkdir -p $basedir/input/eQTL_mashr
