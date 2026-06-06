@@ -1,5 +1,6 @@
 setwd("/home/workspace/")
 rm(list=ls())
+
 df_tissues <- read.table("./input/GTEx_49tissues.txt",header=F,sep="\t")
 tissueList <- unique(df_tissues$V1)
 rm(df_tissues)
@@ -46,18 +47,22 @@ rownames(weight_matrix) <- weight_matrix$replicate
 weight_matrix$replicate <- NULL
 weight_matrix <- as.matrix(weight_matrix)
 
-tmp_dat <- weight_matrix
-tmp_mat[is.na(tmp_mat)] <- 0
 hc <- hclust(
-  dist(tmp_dat),
+  dist(weight_matrix),
   method = "average"
 )
 
+# upper triangle only
+ord <- hc$order
+mat_plot <- weight_matrix[ord, ord]
+
+# 保留upper triangle (含对角线)
+mat_plot[lower.tri(mat_plot)] <- NA
+
 pheatmap(
-  weight_matrix,
-  
-  cluster_rows = hc,
-  cluster_cols = hc,
+  mat_plot,
+  cluster_rows = FALSE,
+  cluster_cols = FALSE,
   
   color = colorRampPalette(
     c("#4575B4",
@@ -66,5 +71,8 @@ pheatmap(
       "#D73027")
   )(100),
   
-  na_col = "grey90"
+  na_col = "white",   # 下三角显示为空白
+  border_color = "grey70"
 )
+
+
